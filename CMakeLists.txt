@@ -59,6 +59,8 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    CheckVisibility.srv
    SetEnvironmentJointState.srv
+   GraspObject.srv
+   CollisionDetection.srv
  )
 
 # Generate actions in the 'action' folder

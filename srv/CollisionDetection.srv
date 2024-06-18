@@ -1,0 +1,12 @@
+string object_a
+string component_a
+string object_b
+string component_b
+geometry_msgs/Vector3 velocity_a
+geometry_msgs/Vector3 velocity_b
+geometry_msgs/Pose pose_a
+geometry_msgs/Pose pose_b
+geometry_msgs/Vector3 impact_point
+geometry_msgs/Vector3 impact_normal
+---
+string success
