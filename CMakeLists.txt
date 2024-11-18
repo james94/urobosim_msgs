@@ -58,6 +58,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_service_files(
    FILES
    CheckVisibility.srv
+   GetGraspedObject.srv
    SetEnvironmentJointState.srv
    GraspObject.srv
    CollisionDetection.srv
