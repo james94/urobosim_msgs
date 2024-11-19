@@ -1,0 +1,4 @@
+string event_or_type
+string object
+---
+string result
