@@ -1,18 +1,25 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(urobosim_msgs)
 
-## Compile as C++11, supported in ROS Kinetic and newer
+## Compile as C++11, updated support for ROS Jazzy and newer
 # add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  genmsg
-  actionlib_msgs
-  geometry_msgs
-  std_msgs
-)
+#find_package(ament_cmake REQUIRED COMPONENTS
+#  genmsg
+#  actionlib_msgs
+#  geometry_msgs
+#  std_msgs
+#)
+
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+#find_package(genmsg REQUIRED)
+#find_package(actionlib_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -55,28 +62,28 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
- add_service_files(
-   FILES
-   CheckVisibility.srv
-   GetGraspedObject.srv
-   SetEnvironmentJointState.srv
-   GraspObject.srv
-   CollisionDetection.srv
-   CheckEventType.srv
- )
+rosidl_generate_interfaces(${PROJECT_NAME}
+   srv/CheckVisibility.srv
+   srv/GetGraspedObject.srv
+   srv/SetEnvironmentJointState.srv
+   srv/GraspObject.srv
+   srv/CollisionDetection.srv
+   srv/CheckEventType.srv
+   action/PerceiveObject.action
+   DEPENDENCIES geometry_msgs std_msgs
+)
 
 # Generate actions in the 'action' folder
-add_action_files(
-  FILES
-  PerceiveObject.action
-)
+#rosidl_generate_interfaces(${PROJECT_NAME}
+#  action/PerceiveObject.action
+#)
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  actionlib_msgs
-  geometry_msgs#   std_msgs
-)
+#generate_messages(
+#  DEPENDENCIES
+#  actionlib_msgs
+#  geometry_msgs#   std_msgs
+#)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -107,7 +114,7 @@ generate_messages(
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
+ament_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES urobosim_msgs
 #  CATKIN_DEPENDS geometry_msgs std_msgs
